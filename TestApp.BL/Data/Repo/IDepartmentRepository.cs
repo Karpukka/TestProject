@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using TestApp.Dal.Model;
+using TestApp.BL.Model;
 
 namespace TestApp.BL.Data.Repo
 {
@@ -7,8 +7,6 @@ namespace TestApp.BL.Data.Repo
     {
       
         ArrayList GetEmployeesByName(string name);
-
-        ArrayList GetEmployeesByDepartment(string name);
         ArrayList GetEmployeesWithDepartment();
     }
 }

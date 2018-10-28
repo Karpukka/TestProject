@@ -1,4 +1,4 @@
-namespace TestApp.Dal.Model
+namespace TestApp.BL.Model
 {
     using System;
     using System.Collections.Generic;

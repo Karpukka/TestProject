@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestApp.Dal.Model;
+using TestApp.BL.Model;
 using System.Data.Entity;
 
 namespace TestApp.BL.Data.Repo

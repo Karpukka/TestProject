@@ -242,10 +242,13 @@
             // 
             // Dtp_Birthday
             // 
+            this.Dtp_Birthday.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.Dtp_Birthday.Location = new System.Drawing.Point(194, 232);
             this.Dtp_Birthday.Name = "Dtp_Birthday";
             this.Dtp_Birthday.Size = new System.Drawing.Size(293, 26);
             this.Dtp_Birthday.TabIndex = 45;
+            this.Dtp_Birthday.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.Dtp_Birthday.Leave += new System.EventHandler(this.Dtp_Birthday_Leave);
             // 
             // l1
             // 

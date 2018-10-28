@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using TestApp.BL.Data.Repo;
 using TestApp.BL.Data.Services;
 using TestApp.UI.Startup;
+using System.Data.Entity;
+using DevExpress.XtraTreeList.Columns;
 
 namespace TestApp.UI
 {
@@ -26,7 +28,12 @@ namespace TestApp.UI
             Dgw_departments.DataSource = _departmentService.GetAllDepartments();
             DgwDepartments_Settings();
             Grb_Base.Visible = false;
+            TrList_structure.DataSource = _departmentService.GetAllDepartments();
+
+            TreeViewInit();
         }
+
+      
 
         #region Settings
         private void DgwDepartments_Settings()
@@ -35,28 +42,22 @@ namespace TestApp.UI
             Dgw_departments.Columns["Department1"].Visible = false;
             Dgw_departments.Columns["Department2"].Visible = false;
             Dgw_departments.Columns["Empoyees"].Visible = false;
+            TrList_structure.ExpandAll();
         }
-        private void DataGridView_Branches_Settings()
+        private void TreeViewInit()
         {
-            try
+            _departmentRepository.GetAsync().ContinueWith(loadTask =>
             {
-                Dgw_Branches.TopLeftHeaderCell.Value = "#";
-                Dgw_Branches.Columns["ParentDepartmentID"].Visible = false;
-                Dgw_Branches.Columns["Department1"].Visible = false;
-                Dgw_Branches.Columns["Department2"].Visible = false;
-                Dgw_Branches.Columns["Empoyees"].Visible = false;
-                label1.Text = "";
-            }
-            catch { label1.Text = "Нет данных"; }
+                TrList_structure.DataSource = _departmentService.GetAllDepartments();
+            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            TrList_structure.ExpandAll();
         }
         #endregion
 
         private void Dgw_departments_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             Lbx_Base_Dep.DataSource = null;
-            Dgw_Branches.DataSource = _departmentService
-                .GetAllBranchesFullInfo(Guid.Parse(Dgw_departments.CurrentRow.Cells["ID"].Value.ToString()));
-            DataGridView_Branches_Settings();
+
 
             try
             {
@@ -69,6 +70,7 @@ namespace TestApp.UI
                      .Rows[e.RowIndex]
                      .Cells["ParentDepartmentID"]
                      .Value.ToString()));
+
             }
             catch { }
 
@@ -85,6 +87,7 @@ namespace TestApp.UI
                 if (departmentsForm.ShowDialog() == DialogResult.OK)
                 {
                     Dgw_departments.DataSource = _departmentService.GetAllDepartments();
+                    TreeViewInit();
                     MessageBox.Show("Новый отдел успешно добавлен",
                         "Departments Operations", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -102,17 +105,29 @@ namespace TestApp.UI
         /// <param name="e"></param>
         private void Btn_remove_Click(object sender, EventArgs e)
         {
-            if (Dgw_departments.SelectedRows.Count > 0)
+            try
             {
-                if (MessageBox.Show("Вы уверены , что хотите удалить отдел?", "Внимание", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (Dgw_departments.SelectedRows.Count > 0)
                 {
-                    _departmentService.RemoveDepartment(Guid.Parse(Tbx_ID.Text.Trim()));
-                    Dgw_departments.DataSource = _departmentService.GetAllDepartments();
-                    MessageBox.Show("Отдел удален");
+                    if (MessageBox.Show("Вы уверены , что хотите удалить отдел?", "Внимание", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    {
+                        _departmentService.RemoveDepartment(Guid.Parse(Tbx_ID.Text.Trim()));
+                        Dgw_departments.DataSource = _departmentService.GetAllDepartments();
+                        TreeViewInit();
+                        MessageBox.Show("Отдел удален");
+                    }
+                    else
+                        return;
                 }
-                else
-                    return;
             }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show("Невозможно удалить отдел вместе с сотрудниками, работающими в этом отделе","Ошибка",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
+            }
+
 
 
         }
@@ -122,17 +137,22 @@ namespace TestApp.UI
             string name = Tbx_Name.Text;
             if (MessageBox.Show("Вы уверены , что хотите внести изменения?", "Внимание", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                _departmentService.UpdateDepartment(Guid.Parse(Tbx_ID.Text),
-                Tbx_Name.Text, Tbx_Code.Text, Cmb_Deps.SelectedValue as Guid?);
-                Dgw_departments.DataSource = _departmentService.GetAllDepartments();
-                Chkb_Base.Checked = false;
-                MessageBox.Show("Отдел  " + name + " успешно изменен");
+                if (Cmb_Deps.Text != Tbx_Name.Text)
+                {
+                    _departmentService.UpdateDepartment(Guid.Parse(Tbx_ID.Text),
+                                   Tbx_Name.Text, Tbx_Code.Text, Cmb_Deps.SelectedValue as Guid?);
+                    Dgw_departments.DataSource = _departmentService.GetAllDepartments();
+                    TreeViewInit();
+                    Chkb_Base.Checked = false;
+                    MessageBox.Show("Отдел  " + name + " успешно изменен");
+                }
+                else
+                {
+                    MessageBox.Show("Нельзя зацикливать отделы по родителю - нехорошо.", "Danger", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
-            else
-            {
-                MessageBox.Show("Ошибка");
-                return;
-            }
+
 
         }
         private void Chkb_Base_CheckedChanged(object sender, EventArgs e)
@@ -152,6 +172,7 @@ namespace TestApp.UI
                 Cmb_Deps.DisplayMember = "Name";
             }
         }
+        #region Validate
         /// <summary>
         /// Певая буква заглавная
         /// </summary>
@@ -163,7 +184,7 @@ namespace TestApp.UI
                 ((TextBox)sender).Text = ((TextBox)sender).Text.ToUpper();
             ((TextBox)sender).Select(((TextBox)sender).Text.Length, 0);
         }
-       
+
         /// <summary>
         /// Только заглвные латинские буквы и ццифры в поле "КОД"
         /// </summary>
@@ -207,6 +228,35 @@ namespace TestApp.UI
             }
         }
 
+        private void TrList_structure_MouseClick(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i < Dgw_departments.Rows.Count; i++)
+            {
+                if (Dgw_departments.Rows[i].Cells["Name"].Value.ToString() == TrList_structure.FocusedNode["Name"].ToString() )
+                {
+                    Dgw_departments.Rows[i].Selected = true;
+                    Lbx_Base_Dep.DataSource = null;
+
+
+                    try
+                    {
+                        Tbx_ID.Text = Dgw_departments.Rows[i].Cells["ID"].Value.ToString();
+                        Tbx_Name.Text = Dgw_departments.Rows[i].Cells["Name"].Value.ToString();
+                        Tbx_Code.Text = Dgw_departments.Rows[i].Cells["Code"].Value.ToString();
+                        Lbx_Base_Dep.DataSource = _departmentService
+                             .GetBaseDepartment(Guid
+                             .Parse(Dgw_departments
+                             .Rows[i]
+                             .Cells["ParentDepartmentID"]
+                             .Value.ToString()));
+
+
+                    }
+                    catch { }
+                }
+            }
+        }
+
         private void Tbx_Name_KeyPress(object sender, KeyPressEventArgs e)
         {
             char l = e.KeyChar;
@@ -215,5 +265,9 @@ namespace TestApp.UI
                 e.Handled = true;
             }
         }
+
+        #endregion
+
+      
     }
 }

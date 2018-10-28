@@ -1,9 +1,7 @@
-namespace TestApp.Dal.Model
+namespace TestApp.BL.Model
 {
-    using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
+    
 
     public partial class CompanyDBContext : DbContext
     {
@@ -20,12 +18,13 @@ namespace TestApp.Dal.Model
             modelBuilder.Entity<Department>()
                 .HasMany(e => e.Department1)
                 .WithOptional(e => e.Department2)
-                .HasForeignKey(e => e.ParentDepartmentID);
+                .HasForeignKey(e => e.ParentDepartmentID)
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Department>()
                 .HasMany(e => e.Empoyees)
                 .WithRequired(e => e.Department)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Empoyee>()
                 .Property(e => e.ID)

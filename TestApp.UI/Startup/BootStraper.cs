@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using TestApp.Dal.Model;
+using TestApp.BL.Model;
 using TestApp.BL.Data.Repo;
 using TestApp.BL.Data.Services;
 using IContainer = Autofac.IContainer;
@@ -22,6 +22,8 @@ namespace TestApp.UI.Startup
             builder.RegisterType<DepartmentsForm>().AsSelf();
             builder.RegisterType<NewEmployeeForm>().AsSelf();
             builder.RegisterType<NewDepartmentForm>().AsSelf();
+            
+            
             return builder.Build();
         }
     }

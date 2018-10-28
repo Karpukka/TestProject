@@ -1,4 +1,4 @@
-﻿using TestApp.Dal.Model;
+﻿using TestApp.BL.Model;
 
 namespace TestApp.BL.Data.Repo
 {

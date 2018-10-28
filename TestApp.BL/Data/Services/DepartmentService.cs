@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TestApp.Dal.Model;
+using TestApp.BL.Model;
 using TestApp.BL.Data.Repo;
 
 namespace TestApp.BL.Data.Services
@@ -10,21 +10,37 @@ namespace TestApp.BL.Data.Services
     public  class DepartmentService: IDepartmentService
     {
         private readonly IDepartmentRepository _departmentRepository;
-
-        public DepartmentService(IDepartmentRepository departmentRepository)
+        private readonly IEmployeeRepository _employeeRepository;
+        public DepartmentService(IDepartmentRepository departmentRepository,
+            IEmployeeRepository employeeRepository)
         {
             _departmentRepository = departmentRepository;
+            _employeeRepository = employeeRepository;
         }
-        public ArrayList GetAllDepartments()
+        //public ArrayList GetAllDepartments()
+        //{
+        //    ArrayList list = new ArrayList();
+        //    var items =_departmentRepository.Get();
+        //    foreach (var item in items)
+        //    {
+        //        list.Add(item);
+        //    }
+        //    return list;
+        //}
+        public IEnumerable<Department> GetAllDepartments()
         {
-            ArrayList list = new ArrayList();
-            var items =_departmentRepository.Get();
+            List<Department> list = new List<Department>();
+            var items = _departmentRepository.Get();
             foreach (var item in items)
             {
                 list.Add(item);
             }
             return list;
         }
+
+       
+
+
 
         public List<string> GetBaseDepartment(Guid value)
         {
@@ -37,10 +53,6 @@ namespace TestApp.BL.Data.Services
             }
             return departmentName;
         }
-
-
-
-
 
         public List<string> GetAllBranches(Guid? value)
         {
@@ -67,6 +79,7 @@ namespace TestApp.BL.Data.Services
         public void RemoveDepartment(Guid id)
         {
             Department department = _departmentRepository.FindById(id);
+           
             _departmentRepository.Remove(department);
         }
         public void AddNewDepartment(Guid id, string name, string code,

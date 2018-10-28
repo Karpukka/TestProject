@@ -15,7 +15,7 @@ namespace TestApp.UI
         private readonly IDepartmentRepository _departmentRepository;
 
         private int Id { get; set; }
-
+        bool flag1, flag2, flag3, flag4 = false;
         public UsersForm(IDepartmentService departmentService,
             IDepartmentRepository departmentRepository, IEmployeeService employeeService)
         {
@@ -189,31 +189,58 @@ namespace TestApp.UI
         {
             if (Tbx_name.Text.Trim() == string.Empty)
             {
+                flag1 = true;
                 l1.Text = "Поле не должно быть пустым";
                 l1.ForeColor = Color.Red;
                 Btn_Change_Employee.Enabled = false;
                 return;
             }
+            else { l1.Text = ""; }
+
+
+
             if (Tbx_SurName.Text.Trim() == string.Empty)
             {
+                flag2 = true;
                 l2.Text = "Поле не должно быть пустым";
                 l2.ForeColor = Color.Red;
                 Btn_Change_Employee.Enabled = false;
                 return;
             }
+            else { l2.Text = ""; }
             if (Tbx_Position.Text.Trim() == string.Empty)
             {
+                flag3 = true;
                 l3.Text = "Поле не должно быть пустым";
                 l3.ForeColor = Color.Red;
                 Btn_Change_Employee.Enabled = false;
                 return;
             }
-            else
+            else { l3.Text = ""; }
+
+
+
+            if (flag1 == true || flag2 == true || flag3 == true || flag4 == true)
             {
-                l1.Text = "";
-                l2.Text = "";
-                l3.Text = "";
                 Btn_Change_Employee.Enabled = true;
+            }
+
+        }
+
+
+
+
+
+        private void Dtp_Birthday_Leave(object sender, EventArgs e)
+        {
+            if ((DateTime.Now.Year - Dtp_Birthday.Value.Year) < 18)
+            {
+                flag4 = true;
+                Btn_Change_Employee.Enabled = false;
+
+                Dtp_Birthday.Value = new DateTime(2000, 1, 1);
+                MessageBox.Show("Сотруднику не может быть меньше 18 лет");
+                return;
             }
         }
     }

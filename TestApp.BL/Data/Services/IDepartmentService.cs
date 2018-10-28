@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TestApp.BL.Model;
 
 namespace TestApp.BL.Data.Services
 {
     public  interface IDepartmentService
     {
-        ArrayList GetAllDepartments();
+        
         List<string> GetAllBranches(Guid? value);
         ArrayList GetAllBranchesFullInfo(Guid? value);
         List<string> GetBaseDepartment(Guid value);
@@ -16,5 +17,9 @@ namespace TestApp.BL.Data.Services
 
         void UpdateDepartment(Guid id, string name, string code,
             Guid? parentDepartmentId = null);
+
+
+        IEnumerable<Department> GetAllDepartments();
+
     }
 }

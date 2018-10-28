@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using TestApp.Dal.Model;
+using TestApp.BL.Model;
 using TestApp.BL.Data.Repo;
 
 namespace TestApp.BL.Data.Services

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.Dgw_departments = new System.Windows.Forms.DataGridView();
-            this.Dgw_Branches = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.Btn_remove = new System.Windows.Forms.Button();
             this.Btn_Change = new System.Windows.Forms.Button();
@@ -47,10 +46,12 @@
             this.Tbx_Code = new System.Windows.Forms.TextBox();
             this.Tbx_Name = new System.Windows.Forms.TextBox();
             this.Tbx_ID = new System.Windows.Forms.TextBox();
+            this.TrList_structure = new DevExpress.XtraTreeList.TreeList();
+            this.colName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.Dgw_departments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Dgw_Branches)).BeginInit();
             this.Grb_Info.SuspendLayout();
             this.Grb_Base.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrList_structure)).BeginInit();
             this.SuspendLayout();
             // 
             // Dgw_departments
@@ -58,7 +59,7 @@
             this.Dgw_departments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Dgw_departments.BackgroundColor = System.Drawing.SystemColors.Control;
             this.Dgw_departments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgw_departments.Location = new System.Drawing.Point(79, 51);
+            this.Dgw_departments.Location = new System.Drawing.Point(674, 31);
             this.Dgw_departments.Margin = new System.Windows.Forms.Padding(4);
             this.Dgw_departments.MultiSelect = false;
             this.Dgw_departments.Name = "Dgw_departments";
@@ -67,23 +68,6 @@
             this.Dgw_departments.Size = new System.Drawing.Size(955, 382);
             this.Dgw_departments.TabIndex = 0;
             this.Dgw_departments.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgw_departments_CellEnter);
-            // 
-            // Dgw_Branches
-            // 
-            this.Dgw_Branches.AllowUserToAddRows = false;
-            this.Dgw_Branches.AllowUserToDeleteRows = false;
-            this.Dgw_Branches.AllowUserToResizeColumns = false;
-            this.Dgw_Branches.AllowUserToResizeRows = false;
-            this.Dgw_Branches.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.Dgw_Branches.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.Dgw_Branches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgw_Branches.Location = new System.Drawing.Point(1053, 51);
-            this.Dgw_Branches.MultiSelect = false;
-            this.Dgw_Branches.Name = "Dgw_Branches";
-            this.Dgw_Branches.ReadOnly = true;
-            this.Dgw_Branches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Dgw_Branches.Size = new System.Drawing.Size(563, 382);
-            this.Dgw_Branches.TabIndex = 1;
             // 
             // label1
             // 
@@ -118,7 +102,7 @@
             // Btn_add
             // 
             this.Btn_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Btn_add.Location = new System.Drawing.Point(810, 449);
+            this.Btn_add.Location = new System.Drawing.Point(1405, 429);
             this.Btn_add.Name = "Btn_add";
             this.Btn_add.Size = new System.Drawing.Size(224, 42);
             this.Btn_add.TabIndex = 5;
@@ -143,7 +127,7 @@
             this.Grb_Info.Controls.Add(this.Tbx_Name);
             this.Grb_Info.Controls.Add(this.Tbx_ID);
             this.Grb_Info.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Grb_Info.Location = new System.Drawing.Point(79, 440);
+            this.Grb_Info.Location = new System.Drawing.Point(674, 420);
             this.Grb_Info.Name = "Grb_Info";
             this.Grb_Info.Size = new System.Drawing.Size(703, 294);
             this.Grb_Info.TabIndex = 6;
@@ -263,15 +247,39 @@
             this.Tbx_ID.Size = new System.Drawing.Size(324, 26);
             this.Tbx_ID.TabIndex = 0;
             // 
+            // TrList_structure
+            // 
+            this.TrList_structure.AutoFillColumn = this.colName;
+            this.TrList_structure.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.colName});
+            this.TrList_structure.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TrList_structure.DataSource = typeof(TestApp.BL.Model.Department);
+            this.TrList_structure.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TrList_structure.Location = new System.Drawing.Point(12, 31);
+            this.TrList_structure.Name = "TrList_structure";
+            this.TrList_structure.OptionsBehavior.Editable = false;
+            this.TrList_structure.OptionsBehavior.ReadOnly = true;
+            this.TrList_structure.ParentFieldName = "ParentDepartmentID";
+            this.TrList_structure.Size = new System.Drawing.Size(655, 382);
+            this.TrList_structure.TabIndex = 13;
+            this.TrList_structure.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TrList_structure_MouseClick);
+            // 
+            // colName
+            // 
+            this.colName.FieldName = "Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 0;
+            // 
             // DepartmentsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1642, 761);
+            this.Controls.Add(this.TrList_structure);
             this.Controls.Add(this.Grb_Info);
             this.Controls.Add(this.Btn_add);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Dgw_Branches);
             this.Controls.Add(this.Dgw_departments);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.Black;
@@ -280,10 +288,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DepartmentsForm";
             ((System.ComponentModel.ISupportInitialize)(this.Dgw_departments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Dgw_Branches)).EndInit();
             this.Grb_Info.ResumeLayout(false);
             this.Grb_Info.PerformLayout();
             this.Grb_Base.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TrList_structure)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,7 +300,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView Dgw_departments;
-        private System.Windows.Forms.DataGridView Dgw_Branches;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Btn_remove;
         private System.Windows.Forms.Button Btn_Change;
@@ -310,5 +317,7 @@
         private System.Windows.Forms.CheckBox Chkb_Base;
         private System.Windows.Forms.GroupBox Grb_Base;
         private System.Windows.Forms.Label label6;
+        private DevExpress.XtraTreeList.TreeList TrList_structure;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn colName;
     }
 }

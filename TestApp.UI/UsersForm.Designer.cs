@@ -226,10 +226,12 @@
             // 
             // Dtp_Birthday
             // 
+            this.Dtp_Birthday.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.Dtp_Birthday.Location = new System.Drawing.Point(144, 302);
             this.Dtp_Birthday.Name = "Dtp_Birthday";
             this.Dtp_Birthday.Size = new System.Drawing.Size(265, 26);
             this.Dtp_Birthday.TabIndex = 26;
+            this.Dtp_Birthday.Leave += new System.EventHandler(this.Dtp_Birthday_Leave);
             // 
             // groupBox1
             // 
@@ -297,7 +299,7 @@
             // 
             this.l3.AutoSize = true;
             this.l3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l3.Location = new System.Drawing.Point(190, 433);
+            this.l3.Location = new System.Drawing.Point(140, 433);
             this.l3.Name = "l3";
             this.l3.Size = new System.Drawing.Size(0, 20);
             this.l3.TabIndex = 32;
@@ -306,7 +308,7 @@
             // 
             this.l2.AutoSize = true;
             this.l2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l2.Location = new System.Drawing.Point(190, 151);
+            this.l2.Location = new System.Drawing.Point(147, 155);
             this.l2.Name = "l2";
             this.l2.Size = new System.Drawing.Size(0, 20);
             this.l2.TabIndex = 31;
@@ -315,7 +317,7 @@
             // 
             this.l1.AutoSize = true;
             this.l1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.l1.Location = new System.Drawing.Point(190, 92);
+            this.l1.Location = new System.Drawing.Point(137, 85);
             this.l1.Name = "l1";
             this.l1.Size = new System.Drawing.Size(0, 20);
             this.l1.TabIndex = 30;

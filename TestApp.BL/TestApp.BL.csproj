@@ -58,17 +58,14 @@
     <Compile Include="Data\Services\EmployeeService.cs" />
     <Compile Include="Data\Services\IDepartmentService.cs" />
     <Compile Include="Data\Services\IEmployeeService.cs" />
+    <Compile Include="Model\ConpanyDBContext.cs" />
+    <Compile Include="Model\Department.cs" />
+    <Compile Include="Model\Empoyee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TestApp.Dal\TestApp.Dal.csproj">
-      <Project>{901a6506-328e-409e-9a5a-27c59429f2d5}</Project>
-      <Name>TestApp.Dal</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

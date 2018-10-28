@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.Grb_departments = new System.Windows.Forms.GroupBox();
+            this.TrList_structure = new DevExpress.XtraTreeList.TreeList();
+            this.colName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Btn_Change_Employees = new System.Windows.Forms.Button();
             this.Btn_Change_Departments = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Dgw_Departments = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,23 +45,22 @@
             this.добавитьСотрудникаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отделыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеОтделовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Grb_departments.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Dgw_Departments)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TrList_structure)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Grb_departments
             // 
             this.Grb_departments.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Grb_departments.Controls.Add(this.TrList_structure);
             this.Grb_departments.Controls.Add(this.pictureBox1);
             this.Grb_departments.Controls.Add(this.Btn_Change_Employees);
             this.Grb_departments.Controls.Add(this.Btn_Change_Departments);
             this.Grb_departments.Controls.Add(this.label7);
             this.Grb_departments.Controls.Add(this.label6);
             this.Grb_departments.Controls.Add(this.label1);
-            this.Grb_departments.Controls.Add(this.Dgw_Departments);
             this.Grb_departments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Grb_departments.Location = new System.Drawing.Point(34, 136);
             this.Grb_departments.Margin = new System.Windows.Forms.Padding(4);
@@ -69,6 +70,39 @@
             this.Grb_departments.TabIndex = 0;
             this.Grb_departments.TabStop = false;
             this.Grb_departments.Text = "Рога и копыта";
+            // 
+            // TrList_structure
+            // 
+            this.TrList_structure.AutoFillColumn = this.colName;
+            this.TrList_structure.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.colName});
+            this.TrList_structure.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TrList_structure.DataSource = typeof(TestApp.BL.Model.Department);
+            this.TrList_structure.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TrList_structure.Location = new System.Drawing.Point(7, 26);
+            this.TrList_structure.Name = "TrList_structure";
+            this.TrList_structure.ParentFieldName = "ParentDepartmentID";
+            this.TrList_structure.Size = new System.Drawing.Size(498, 328);
+            this.TrList_structure.TabIndex = 12;
+            this.TrList_structure.MouseEnter += new System.EventHandler(this.TrList_structure_MouseEnter);
+            // 
+            // colName
+            // 
+            this.colName.FieldName = "Name";
+            this.colName.Name = "colName";
+            this.colName.Visible = true;
+            this.colName.VisibleIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::TestApp.UI.Properties.Resources.r;
+            this.pictureBox1.Location = new System.Drawing.Point(528, 26);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(498, 408);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // Btn_Change_Employees
             // 
@@ -82,7 +116,7 @@
             // 
             // Btn_Change_Departments
             // 
-            this.Btn_Change_Departments.Location = new System.Drawing.Point(262, 361);
+            this.Btn_Change_Departments.Location = new System.Drawing.Point(273, 361);
             this.Btn_Change_Departments.Name = "Btn_Change_Departments";
             this.Btn_Change_Departments.Size = new System.Drawing.Size(232, 73);
             this.Btn_Change_Departments.TabIndex = 8;
@@ -111,24 +145,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(14, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 20);
+            this.label1.Size = new System.Drawing.Size(213, 20);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Отделы";
-            // 
-            // Dgw_Departments
-            // 
-            this.Dgw_Departments.AllowUserToAddRows = false;
-            this.Dgw_Departments.AllowUserToDeleteRows = false;
-            this.Dgw_Departments.AllowUserToResizeColumns = false;
-            this.Dgw_Departments.AllowUserToResizeRows = false;
-            this.Dgw_Departments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.Dgw_Departments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgw_Departments.Location = new System.Drawing.Point(7, 76);
-            this.Dgw_Departments.Name = "Dgw_Departments";
-            this.Dgw_Departments.ReadOnly = true;
-            this.Dgw_Departments.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.Dgw_Departments.Size = new System.Drawing.Size(487, 271);
-            this.Dgw_Departments.TabIndex = 0;
+            this.label1.Text = "Структура предприятия";
             // 
             // label5
             // 
@@ -196,17 +215,6 @@
             this.редактированиеОтделовToolStripMenuItem.Text = "Редактирование отделов";
             this.редактированиеОтделовToolStripMenuItem.Click += new System.EventHandler(this.Btn_Change_Departments_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::TestApp.UI.Properties.Resources.r;
-            this.pictureBox1.Location = new System.Drawing.Point(528, 26);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(498, 408);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -225,10 +233,10 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Grb_departments.ResumeLayout(false);
             this.Grb_departments.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Dgw_Departments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrList_structure)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,7 +245,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox Grb_departments;
-        private System.Windows.Forms.DataGridView Dgw_Departments;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Btn_Change_Employees;
@@ -252,6 +259,8 @@
         private System.Windows.Forms.ToolStripMenuItem отделыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem редактированиеОтделовToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private DevExpress.XtraTreeList.TreeList TrList_structure;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn colName;
     }
 }
 

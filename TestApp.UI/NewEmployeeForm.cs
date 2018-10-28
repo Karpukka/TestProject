@@ -10,7 +10,7 @@ namespace TestApp.UI
 
         private readonly IEmployeeService _employeeService;
         private readonly IDepartmentService _departmentService;
-        bool flag1, flag2, flag3;
+        bool flag1, flag2, flag3,flag4;
         public NewEmployeeForm(IEmployeeService employeeService, IDepartmentService departmentService)
         {
             _employeeService = employeeService;
@@ -19,7 +19,7 @@ namespace TestApp.UI
             Cmb_departments.DataSource = _departmentService.GetAllDepartments();
             Btn_Ok.Enabled = false;
         }
-
+        #region Validate
         private void Btn_Ok_Click(object sender, EventArgs e)
         {
             _employeeService.AddNewEmployee(Tbx_name.Text,
@@ -28,12 +28,27 @@ namespace TestApp.UI
             this.DialogResult = DialogResult.OK;
         }
 
+        private void Dtp_Birthday_Leave(object sender, EventArgs e)
+        {
+            if ((DateTime.Now.Year - Dtp_Birthday.Value.Year) < 18)
+            {
+                flag4 = true;
+                Btn_Ok.Enabled = false;
+
+                Dtp_Birthday.Value = new DateTime(2000, 1, 1);
+                MessageBox.Show("Сотруднику не может быть меньше 18 лет");
+                return;
+            }
+        }
+
         private void Tbx_name_TextChanged(object sender, EventArgs e)
         {
             if (((TextBox)sender).Text.Length == 1)
                 ((TextBox)sender).Text = ((TextBox)sender).Text.ToUpper();
             ((TextBox)sender).Select(((TextBox)sender).Text.Length, 0);
         }
+
+       
 
         private void Tbx_name_MouseLeave(object sender, EventArgs e)
         {
@@ -47,6 +62,8 @@ namespace TestApp.UI
                 return;
             }
             else { l1.Text = ""; }
+
+
 
             if (Tbx_SurName.Text.Trim() == string.Empty)
             {
@@ -66,7 +83,10 @@ namespace TestApp.UI
                 return;
             }
             else { l3.Text = ""; }
-            if (flag1 == true || flag2 == true || flag3 == true)
+
+           
+
+            if (flag1 == true || flag2 == true || flag3 == true||flag4==true)
             {
                 Btn_Ok.Enabled = true;
             }
@@ -81,7 +101,7 @@ namespace TestApp.UI
                 e.Handled = true;
             }
         }
+        #endregion
 
-       
     }
 }

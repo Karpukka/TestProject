@@ -47,7 +47,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 22);
+            this.label5.Location = new System.Drawing.Point(-4, 19);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(140, 20);
@@ -57,7 +57,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 139);
+            this.label4.Location = new System.Drawing.Point(2, 139);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 20);
@@ -67,7 +67,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 87);
+            this.label3.Location = new System.Drawing.Point(2, 84);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 20);
@@ -77,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 32);
+            this.label2.Location = new System.Drawing.Point(2, 32);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 20);
@@ -86,7 +86,7 @@
             // 
             // Tbx_Code
             // 
-            this.Tbx_Code.Location = new System.Drawing.Point(186, 136);
+            this.Tbx_Code.Location = new System.Drawing.Point(227, 133);
             this.Tbx_Code.Margin = new System.Windows.Forms.Padding(5);
             this.Tbx_Code.Name = "Tbx_Code";
             this.Tbx_Code.Size = new System.Drawing.Size(453, 26);
@@ -96,7 +96,7 @@
             // 
             // Tbx_Name
             // 
-            this.Tbx_Name.Location = new System.Drawing.Point(186, 81);
+            this.Tbx_Name.Location = new System.Drawing.Point(227, 78);
             this.Tbx_Name.Margin = new System.Windows.Forms.Padding(5);
             this.Tbx_Name.Name = "Tbx_Name";
             this.Tbx_Name.Size = new System.Drawing.Size(453, 26);
@@ -107,7 +107,7 @@
             // 
             // Tbx_ID
             // 
-            this.Tbx_ID.Location = new System.Drawing.Point(186, 32);
+            this.Tbx_ID.Location = new System.Drawing.Point(227, 29);
             this.Tbx_ID.Margin = new System.Windows.Forms.Padding(5);
             this.Tbx_ID.Name = "Tbx_ID";
             this.Tbx_ID.ReadOnly = true;
@@ -150,7 +150,7 @@
             // 
             this.Grb_Base.Controls.Add(this.Cmb_Deps);
             this.Grb_Base.Controls.Add(this.label5);
-            this.Grb_Base.Location = new System.Drawing.Point(23, 170);
+            this.Grb_Base.Location = new System.Drawing.Point(6, 167);
             this.Grb_Base.Name = "Grb_Base";
             this.Grb_Base.Size = new System.Drawing.Size(657, 60);
             this.Grb_Base.TabIndex = 20;
@@ -171,7 +171,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(183, 115);
+            this.label6.Location = new System.Drawing.Point(224, 112);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(410, 16);
             this.label6.TabIndex = 21;
@@ -181,7 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 324);
+            this.ClientSize = new System.Drawing.Size(739, 324);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Grb_Base);
             this.Controls.Add(this.ChBx_Base);
@@ -195,6 +195,10 @@
             this.Controls.Add(this.Tbx_ID);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(5);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(755, 363);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(755, 363);
             this.Name = "NewDepartmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "NewDepartmentForm";
